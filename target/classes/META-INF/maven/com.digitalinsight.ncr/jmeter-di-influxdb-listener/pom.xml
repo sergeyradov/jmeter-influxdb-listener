@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.digitalinsight.ncr</groupId>
+  <artifactId>jmeter-di-influxdb-listener</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+    <dependencyManagement>
+
+    </dependencyManagement>
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_core -->
+	<dependency>
+	    <groupId>org.apache.jmeter</groupId>
+	    <artifactId>ApacheJMeter_core</artifactId>
+	    <version>3.3</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_components -->
+	<dependency>
+	    <groupId>org.apache.jmeter</groupId>
+	    <artifactId>ApacheJMeter_components</artifactId>
+	    <version>3.3</version>
+        <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
+	<dependency>
+	    <groupId>org.influxdb</groupId>
+	    <artifactId>influxdb-java</artifactId>
+	    <version>2.14</version>
+        <scope>compile</scope>
+	</dependency>
+	
+  </dependencies>
+  <build>
+    <plugins>
+    	<plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <executions>
+                   <execution>
+                       <id>copy</id>
+                       <phase>prepare-package</phase>
+                       <goals>
+                           <goal>copy</goal>
+                       </goals>
+                       <configuration>
+                           <artifactItems>
+                               <artifactItem>
+                                   <groupId>org.apache.jmeter</groupId>
+								   <artifactId>ApacheJMeter_core</artifactId>
+								   <version>3.3</version>
+                                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                               </artifactItem>
+                               <artifactItem>
+                                   <groupId>org.apache.jmeter</groupId>
+							       <artifactId>ApacheJMeter_components</artifactId>
+							       <version>3.3</version>
+                                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                               </artifactItem>
+                               <artifactItem>
+                                   <groupId>org.influxdb</groupId>
+                                   <artifactId>influxdb-java</artifactId>
+                                   <version>2.14</version>
+                                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                               </artifactItem>
+                          </artifactItems>
+                          </configuration>
+                          </execution>
+                          </executions>
+                          </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>2.4</version>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <shadedArtifactAttached>false</shadedArtifactAttached>
+                <createDependencyReducedPom>false</createDependencyReducedPom>
+                <artifactSet>
+                    <includes>
+                        <include>*:*</include>
+                    </includes>
+                </artifactSet>
+                <filters>
+                    <filter>
+                        <artifact>*:*</artifact>
+                    </filter>
+                </filters>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>shade</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+
+     </plugins>
+	</build>
+</project>

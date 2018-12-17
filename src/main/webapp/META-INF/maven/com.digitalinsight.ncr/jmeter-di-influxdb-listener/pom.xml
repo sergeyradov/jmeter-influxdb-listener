@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.digitalinsight.ncr</groupId>
+  <artifactId>jmeter-di-influxdb-listener</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <dependencies>
+  	<!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_core -->
+	<dependency>
+	    <groupId>org.apache.jmeter</groupId>
+	    <artifactId>ApacheJMeter_core</artifactId>
+	    <version>3.3</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.jmeter/ApacheJMeter_components -->
+	<dependency>
+	    <groupId>org.apache.jmeter</groupId>
+	    <artifactId>ApacheJMeter_components</artifactId>
+	    <version>3.3</version>
+	    <scope>provided</scope>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.influxdb/influxdb-java -->
+	<dependency>
+	    <groupId>org.influxdb</groupId>
+	    <artifactId>influxdb-java</artifactId>
+	    <version>2.14</version>
+	    
+	</dependency>  	
+  </dependencies>
+  <build>
+    <plugins>
+    	<plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <executions>
+                   <execution>
+                       <id>copy</id>
+                       <phase>prepare-package</phase>
+                       <goals>
+                           <goal>copy</goal>
+                       </goals>
+                       <configuration>
+                           <artifactItems>
+                               <artifactItem>
+                                   <groupId>org.influxdb</groupId>
+                                   <artifactId>influxdb-java</artifactId>
+                                   <version>2.14</version>
+                                   <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                               </artifactItem>
+                          </artifactItems>
+                          </configuration>
+                          </execution>
+                          </executions>
+                          </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+                <archiveClasses>false</archiveClasses>
+            </configuration>
+        </plugin>
+     </plugins>
+	</build>
+</project>
