@@ -25,8 +25,7 @@ This component adds functionality to send samplers metrics to InfluxDB. This wil
 
 * Download the source code from the Gitlab.
 * Just do a mvn clean install (Git bash is required)
-* Jar will be generated under the target directory. Copy the Jar to \<Jmeter Installed Directory\>/lib/ext/ for DI Jmeter \<Jmeter Installed Directory\>/di/plugins
-*
+* Jar will be generated under the target directory. Copy the Jar to \<Jmeter Installed Directory\>/lib/ext/ 
 
 
 ## References
