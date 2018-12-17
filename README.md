@@ -13,7 +13,8 @@ This component adds functionality to send samplers metrics to InfluxDB. This wil
 ## jar Dependencies Required
 
 * influxdb-java:2.14
-* jmeter-di:1.0.0-SNAPSHOT
+* ApacheJMeter_components.jar
+* ApacheJMeter_core.jar
 
 ## Jmeter Target
 
